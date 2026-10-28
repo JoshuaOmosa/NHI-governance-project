@@ -1,0 +1,27 @@
+{
+  "defaults": {
+    "max_credential_age_days": 180,
+    "max_credential_lifetime_days": 365,
+    "expiry_warning_days": 30,
+    "stale_after_days": 90,
+    "never_used_grace_days": 30,
+    "max_active_credentials": 2,
+    "require_owner": true,
+    "privileged_roles": [
+      "Directory.ReadWrite.All",
+      "Application.ReadWrite.All",
+      "RoleManagement.ReadWrite.Directory",
+      "Administrators",
+      "Domain Admins",
+      "sudo",
+      "wheel"
+    ],
+    "justification_tag": "nhi:justification",
+    "auto_disable_stale": true,
+    "rotation_overlap_days": 7
+  },
+  "environments": {
+    "prod": { "max_credential_age_days": 90 },
+    "dev":  { "stale_after_days": 120 }
+  }
+}

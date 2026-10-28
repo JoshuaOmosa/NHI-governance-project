@@ -1,0 +1,73 @@
+{
+  "tenantId": "contoso-demo-tenant",
+  "exportedAt": "2026-10-23T06:00:00Z",
+  "servicePrincipals": [
+    {"id": "sp-0001", "appId": "app-0001", "displayName": "payments-api", "accountEnabled": true,
+     "createdDateTime": "2025-06-01T09:00:00Z", "tags": ["env=prod"],
+     "owners": [{"userPrincipalName": "payments-team@contoso.example"}], "appRoleAssignments": []},
+    {"id": "sp-0002", "appId": "app-0002", "displayName": "legacy-reporting", "accountEnabled": true,
+     "createdDateTime": "2023-03-14T09:00:00Z", "tags": ["env=prod"],
+     "owners": [], "appRoleAssignments": [{"roleName": "Reports.Read.All"}]},
+    {"id": "sp-0003", "appId": "app-0003", "displayName": "ci-deployer", "accountEnabled": true,
+     "createdDateTime": "2025-02-01T09:00:00Z",
+     "tags": ["env=prod", "nhi:justification=CHG-2041 pipeline deploys app registrations"],
+     "owners": [{"userPrincipalName": "platform@contoso.example"}],
+     "appRoleAssignments": [{"roleName": "Application.ReadWrite.All"}]},
+    {"id": "sp-0004", "appId": "app-0004", "displayName": "data-sync", "accountEnabled": true,
+     "createdDateTime": "2025-11-01T09:00:00Z", "tags": ["env=dev"],
+     "owners": [{"userPrincipalName": "data-eng@contoso.example"}], "appRoleAssignments": []},
+    {"id": "sp-0005", "appId": "app-0005", "displayName": "old-poc", "accountEnabled": false,
+     "createdDateTime": "2026-01-01T09:00:00Z", "tags": ["env=dev"],
+     "owners": [{"userPrincipalName": "innovation@contoso.example"}], "appRoleAssignments": []},
+    {"id": "sp-0006", "appId": "app-0006", "displayName": "breakglass-automation", "accountEnabled": true,
+     "createdDateTime": "2024-08-01T09:00:00Z",
+     "tags": ["env=prod", "nhi:protected=true", "nhi:justification=SEC-0007 emergency access runbook"],
+     "owners": [{"userPrincipalName": "security@contoso.example"}],
+     "appRoleAssignments": [{"roleName": "RoleManagement.ReadWrite.Directory"}]},
+    {"id": "sp-0007", "appId": "app-0007", "displayName": "monitoring-agent", "accountEnabled": true,
+     "createdDateTime": "2025-05-01T09:00:00Z", "tags": ["env=prod"],
+     "owners": [{"userPrincipalName": "sre@contoso.example"}],
+     "appRoleAssignments": [{"roleName": "Directory.ReadWrite.All"}]},
+    {"id": "sp-0008", "appId": "app-0008", "displayName": "new-integration", "accountEnabled": true,
+     "createdDateTime": "2026-10-10T09:00:00Z", "tags": ["env=dev"],
+     "owners": [{"userPrincipalName": "partners@contoso.example"}], "appRoleAssignments": []}
+  ],
+  "applications": [
+    {"appId": "app-0001", "passwordCredentials": [
+      {"keyId": "f38b2ffc-80a4-4f5a-91c9-bc701e7ea419", "displayName": "prod-2026Q3",
+       "startDateTime": "2026-09-01T00:00:00Z", "endDateTime": "2027-03-01T00:00:00Z"}]},
+    {"appId": "app-0002", "passwordCredentials": [
+      {"keyId": "f3f49249-dc28-4f90-a5ae-c7978306d03b", "displayName": "do-not-delete",
+       "startDateTime": "2024-11-10T00:00:00Z", "endDateTime": "2099-12-31T00:00:00Z"}]},
+    {"appId": "app-0003", "keyCredentials": [
+      {"keyId": "e5121482-3929-4d22-a255-accb1a466884", "displayName": "deployer-cert", "type": "AsymmetricX509Cert",
+       "startDateTime": "2026-08-20T00:00:00Z", "endDateTime": "2026-11-10T00:00:00Z"}]},
+    {"appId": "app-0004", "passwordCredentials": [
+      {"keyId": "6bad6be2-8e7a-46e9-9f19-950499dd251d", "displayName": "sync-a",
+       "startDateTime": "2026-04-01T00:00:00Z", "endDateTime": "2027-04-01T00:00:00Z"},
+      {"keyId": "d7a7a3cc-8c3d-4f16-9293-de8fc88b2875", "displayName": "sync-b",
+       "startDateTime": "2026-09-10T00:00:00Z", "endDateTime": "2027-03-10T00:00:00Z"},
+      {"keyId": "7dabe929-c4a3-44bf-86cd-75e9bb049a79", "displayName": "sync-old",
+       "startDateTime": "2025-12-01T00:00:00Z", "endDateTime": "2026-06-01T00:00:00Z"}]},
+    {"appId": "app-0005", "passwordCredentials": [
+      {"keyId": "70eb9a0a-9626-4ae6-85e8-18fac0433cbd", "displayName": "poc",
+       "startDateTime": "2026-07-01T00:00:00Z", "endDateTime": "2027-01-01T00:00:00Z"}]},
+    {"appId": "app-0006", "passwordCredentials": [
+      {"keyId": "14aa4e71-9d3c-4dec-80a6-1f933d6c51e3", "displayName": "breakglass",
+       "startDateTime": "2026-02-01T00:00:00Z", "endDateTime": "2027-02-01T00:00:00Z"}]},
+    {"appId": "app-0007", "passwordCredentials": [
+      {"keyId": "1919e93a-d117-45ad-8988-93101c593af5", "displayName": "agent",
+       "startDateTime": "2026-08-15T00:00:00Z", "endDateTime": "2027-02-15T00:00:00Z"}]},
+    {"appId": "app-0008", "passwordCredentials": [
+      {"keyId": "e4163207-d094-4996-82f0-ee99731c9452", "displayName": "initial",
+       "startDateTime": "2026-10-10T00:00:00Z", "endDateTime": "2027-04-10T00:00:00Z"}]}
+  ],
+  "signInActivities": [
+    {"appId": "app-0001", "lastSignInActivity": {"lastSignInDateTime": "2026-10-22T18:04:00Z"}},
+    {"appId": "app-0002", "lastSignInActivity": {"lastSignInDateTime": "2026-05-01T02:00:00Z"}},
+    {"appId": "app-0003", "lastSignInActivity": {"lastSignInDateTime": "2026-10-23T05:12:00Z"}},
+    {"appId": "app-0004", "lastSignInActivity": {"lastSignInDateTime": "2026-10-20T11:30:00Z"}},
+    {"appId": "app-0006", "lastSignInActivity": {"lastSignInDateTime": "2026-03-01T00:00:00Z"}},
+    {"appId": "app-0007", "lastSignInActivity": {"lastSignInDateTime": "2026-10-23T05:59:00Z"}}
+  ]
+}

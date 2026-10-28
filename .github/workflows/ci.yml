@@ -1,0 +1,61 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 6 * * 1"   # weekly compliance run
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Unit tests
+        run: python -m unittest discover -s tests -t . -v
+
+  compliance-report:
+    needs: test
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: src
+      SOURCES: --azure sample_data/azure_ad_export.json --local sample_data/local_accounts.json --as-of 2026-10-23T06:00:00Z
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Audit
+        run: python -m nhi_gov audit $SOURCES
+      - name: Write Markdown report and HTML dashboard
+        run: |
+          python -m nhi_gov report $SOURCES --format md   --with-plan --out output/compliance-report.md
+          python -m nhi_gov report $SOURCES --format html --with-plan --out output/dashboard.html
+          cat output/compliance-report.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Gate fails on high-severity findings
+        run: |
+          # The sample inventory has planted high findings, so --fail-on high must exit 3.
+          set +e
+          python -m nhi_gov audit $SOURCES --fail-on high > /dev/null
+          code=$?
+          set -e
+          if [ "$code" -ne 3 ]; then echo "::error::expected exit 3, got $code"; exit 1; fi
+      - name: Enforce (apply) and verify remediation
+        run: |
+          python -m nhi_gov enforce $SOURCES --apply --log output/enforcement-log.jsonl --snapshot output/inventory-after.json
+          python -m nhi_gov audit --snapshot-in output/inventory-after.json --as-of 2026-10-23T06:00:00Z
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nhi-compliance
+          path: output/
+          retention-days: 30

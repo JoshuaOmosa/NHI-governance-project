@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nhi-governance-engine"
+version = "0.1.0"
+description = "Non-human identity and service account lifecycle governance: inventory, credential audit, automated expiry, compliance reporting"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Joshua Omosa" }]
+requires-python = ">=3.10"
+
+[project.scripts]
+nhi-gov = "nhi_gov.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

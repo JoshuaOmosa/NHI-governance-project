@@ -1,0 +1,23 @@
+{
+  "exportedAt": "2026-10-23T06:00:00Z",
+  "hosts": [
+    {"hostname": "build-01", "os": "windows", "env": "prod", "accounts": [
+      {"name": "svc_backup", "enabled": true, "created": "2023-01-10T00:00:00Z",
+       "password_last_set": "2025-12-01T00:00:00Z", "password_expires": null,
+       "last_logon": "2026-10-22T23:00:00Z", "groups": ["Administrators", "Backup Operators"],
+       "owner": "ops@contoso.example"},
+      {"name": "svc_sql", "enabled": true, "created": "2024-04-02T00:00:00Z",
+       "password_last_set": "2026-09-15T00:00:00Z", "password_expires": "2026-12-14T00:00:00Z",
+       "last_logon": "2026-10-23T04:00:00Z", "groups": ["Users"], "owner": "dba@contoso.example"}
+    ]},
+    {"hostname": "web-02", "os": "linux", "env": "dev", "accounts": [
+      {"name": "deploy", "enabled": true, "created": "2025-03-01T00:00:00Z",
+       "password_last_set": "2026-07-01T00:00:00Z", "password_expires": "2026-12-28T00:00:00Z",
+       "last_logon": "2026-06-10T08:00:00Z", "groups": ["sudo"],
+       "tags": {"nhi:justification": "INF-311 deploys systemd units"}},
+      {"name": "svc_metrics", "enabled": true, "created": "2025-09-01T00:00:00Z",
+       "password_last_set": "2026-08-01T00:00:00Z", "password_expires": "2027-01-28T00:00:00Z",
+       "last_logon": "2026-10-23T05:00:00Z", "groups": ["metrics"], "owner": "sre@contoso.example"}
+    ]}
+  ]
+}
